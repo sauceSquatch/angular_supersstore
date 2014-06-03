@@ -1,4 +1,5 @@
-angular.module("customFilters", []).filter("unique", function() {
+angular.module("customFilters", [])
+.filter("unique", function() {
 	return function(data, propertyName) {
 		if(angular.isArray(data) && angular.isString(propertyName)) {
 			var results = [];
@@ -18,16 +19,19 @@ angular.module("customFilters", []).filter("unique", function() {
 })
 .filter("range", function($filter) {
 	return function(data, page, size) {
+		//return data;
+		
 		if(angular.isArray(data) &&angular.isNumber(page) &&angular.isNumber(size)) {
 			var start_index = (page - 1) * size;
 			if(data.length < start_index) {
 				return[];
 			} else {
-				return $filter("limitedTo")(data.splice(start_index), size);
+				return $filter("limitTo")(data.splice(start_index), size);
 			}
 		} else {
 			return data;
 		}
+		
 	}
 })
 .filter("pageCount", function() {
